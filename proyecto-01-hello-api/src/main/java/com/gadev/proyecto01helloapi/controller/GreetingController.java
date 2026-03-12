@@ -28,4 +28,19 @@ public class GreetingController {
         return "Fecha y hora actual: " + ahora.format(formato);
     }
 
+    @GetMapping("/momento")
+    public String saludoPorMomento(){
+        // Obtenemos la hora actual (formato 24 horas, de 0 a 23)
+        int hora = LocalDateTime.now().getHour();
+
+        // Retornamos saludo dependiendo de la hora
+        if (hora >= 6 && hora < 12){
+            return "Buenos dias!";
+        } else if (hora >= 12 && hora < 19 ){
+            return "Buenas tardes!";
+        } else {
+            return "Buenas noches!";
+        }
+    }
+
 }
