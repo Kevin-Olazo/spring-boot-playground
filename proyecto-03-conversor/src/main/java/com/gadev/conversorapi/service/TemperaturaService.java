@@ -29,9 +29,11 @@ public class TemperaturaService {
             resultado = (valor - 32) * 5.0 / 9.0;
             formula = "(°F - 32) × 5/9";
         } else if (desde == UnidadTemperatura.CELSIUS && hacia == UnidadTemperatura.KELVIN) {
+
             resultado = valor + 273.15;
             formula = "°C + 273.15";
         } else if (desde == UnidadTemperatura.KELVIN && hacia == UnidadTemperatura.CELSIUS) {
+            if (valor < 0) throw new ConversionException("El Kelvin no puede ser negativo");
             resultado = valor - 273.15;
             formula = "K - 273.15";
         } else if (desde == UnidadTemperatura.FAHRENHEIT && hacia == UnidadTemperatura.KELVIN) {
