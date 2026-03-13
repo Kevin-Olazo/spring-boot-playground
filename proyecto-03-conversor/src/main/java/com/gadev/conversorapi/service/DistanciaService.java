@@ -9,12 +9,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class DistanciaService {
 
+    // Método principal para convertir distancias
     public ConversionResponse convertir(ConversionRequest request) {
 
+        // Parsear las unidades de distancia desde el request
         UnidadDistancia desde = parsearUnidad(request.getDesde());
         UnidadDistancia hacia = parsearUnidad(request.getHacia());
         double valor = request.getValor();
 
+        // Validar que el valor no sea negativo y que las unidades no sean iguales
         if (valor < 0){
             throw new ConversionException("La distancia no puede ser negativa");
         }
@@ -34,6 +37,7 @@ public class DistanciaService {
 
     }
 
+    // Métodos auxiliares para convertir a y desde metros
     private double aMetros(double valor, UnidadDistancia unidad){
         return switch (unidad) {
             case METROS -> valor;
@@ -52,6 +56,7 @@ public class DistanciaService {
         };
     }
 
+    // Método para parsear la unidad de distancia desde el string del request
     private UnidadDistancia parsearUnidad(String unidad) {
         try {
             return UnidadDistancia.valueOf(unidad.toUpperCase().trim());
